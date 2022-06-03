@@ -1,6 +1,5 @@
 {
 	"name": "rmphp/content",
-	"version": "1.0",
 	"license": "proprietary",
 	"authors": [
 		{
@@ -17,4 +16,5 @@
 			"Rmphp\\Content\\": "src/"
 		}
 	}
+	
 }
