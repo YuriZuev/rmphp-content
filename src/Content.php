@@ -33,7 +33,7 @@ class Content implements TemplateInterface {
 	 * @return $this
 	 */
 	public function setTemplate(string $template) : TemplateInterface {
-		$this->basePath = dirname(dirname(dirname(dirname(__DIR__))));
+		$this->basePath = dirname(__DIR__, 4);
 		$this->template = $this->basePath.'/'.$template;
 		return $this;
 	}
@@ -45,6 +45,13 @@ class Content implements TemplateInterface {
 	public function setSubtemplePath(string $subtemplatePath) : TemplateInterface {
 		$this->subtemplatePath = $this->basePath.'/'.$subtemplatePath;
 		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getSubtemplePath(): string {
+		return $this->subtemplatePath;
 	}
 
 
@@ -75,7 +82,7 @@ class Content implements TemplateInterface {
 	 * @param array $resource
 	 * @throws AppException
 	 */
-	public function addSubtpl(string $point, string $subTempl, array $resource = []) : void {
+	public function addSubtemple(string $point, string $subTempl, array $resource = []) : void {
 		if (empty($this->subtemplatePath))throw new AppException("SubtemplatePath is not defined");
 		if (empty($point)) throw new AppException("Empty point");
 		if (empty($subTempl) || !file_exists($this->subtemplatePath."/".$subTempl)) throw new AppException($this->subtemplatePath."/".$subTempl. " is not found");
@@ -92,9 +99,9 @@ class Content implements TemplateInterface {
 	 * @param array $resource
 	 * @throws AppException
 	 */
-	public function setSubtempl(string $point, string $subTempl, array $resource = []) : void {
+	public function setSubtemple(string $point, string $subTempl, array $resource = []) : void {
 		unset($this->content[$point]);
-		$this->addSubtpl($point, $subTempl, $resource);
+		$this->addSubtemple($point, $subTempl, $resource);
 	}
 
 	/**
