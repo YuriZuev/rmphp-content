@@ -119,7 +119,11 @@ class Content implements TemplateInterface {
 	 * @return string
 	 * @throws AppException
 	 */
-	public function inc(string $incFile) : string {
+	public function inc(string $incFile, array $resource = []) : string {
+		if(empty($this->data)) $this->data = new ContentData();
+		foreach ($resource as $resKey => $resVal){
+			$this->data->{$resKey} = $resVal;
+		}
 		if(empty($incFile) || !file_exists($this->subtemplatePath."/".$incFile)) throw new AppException("Empty inc file");
 		ob_start(); include $this->subtemplatePath."/".$incFile; $out = ob_get_contents(); ob_end_clean();
 		return $out;
