@@ -73,6 +73,15 @@ class Content implements TemplateInterface {
 		}
 	}
 
+	/**
+	 * @param array $data
+	 * @return void
+	 */
+	public function addData(array $data = []) : void {
+		foreach ($data as $dataKey => $dataVal){
+			$this->{$dataKey} = $dataVal;
+		}
+	}
 
 	/**
 	 * @inheritDoc
@@ -110,6 +119,8 @@ class Content implements TemplateInterface {
 		unset(ContentData::$content[$point]);
 		$this->addSubtemplate($point, $subtemplate, $resource);
 	}
+
+
 
 	/**
 	 * @inheritDoc
